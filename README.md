@@ -1,8 +1,18 @@
-# React + Vite
+# Dice Roller Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This is a simple 3D Dice Roller game built with React. Players can roll two dice and see who gets the higher number. Players can also customize their names.
 
-Currently, two official plugins are available:
+## Features
+- Roll two dice and display results.
+- Customizable player names.
+- Animation for rolling the dice.
+- Responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+- React
+- CSS
+- JavaScript
+
+## Assignment Info
+This project is created as part of Week 9 assignments for Patika Frontend Bootcamp.

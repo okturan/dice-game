@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+  background-color: #2f2f3f;
+  font-size: clamp(1.944rem, 1.3755rem + 2.8423vw, 2.4414rem);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.players {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  margin-top: 3rem;
+}
+
+.player-label {
+  background-color: #3b3b4f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 40%;
+}
+
+.player-label:focus {
+  outline: 2px solid #63c8a5;
+}
+
+.dice-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 10vw;
+  margin-block: 5%;
+}
+
+.roll-button {
+  padding: 0.3rem 6rem;
+  background-color: #63c8a5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, cursor 0.3s ease;
+}
+
+.roll-button:hover {
+  background-color: #52b091;
+}
+
+.roll-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

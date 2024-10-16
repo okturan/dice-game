@@ -3,6 +3,11 @@
 ## Overview
 This is a simple 3D Dice Roller game built with React. Players can roll two dice and see who gets the higher number. Players can also customize their names.
 
+## Demo
+
+Check out the [live version:](https://3d-dice-game.pages.dev/)
+![Project Screen Recording](screen-recording.gif)
+
 ## Features
 - Roll two dice and display results.
 - Customizable player names.

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Dice from "./components/Dice";
+import { outcomeMessage, rollDie } from "./game";
 import "./App.css";
 
 function App() {
@@ -15,25 +16,18 @@ function App() {
   const ROLL_INTERVAL = 500;
   const MESSAGE_DELAY = 500;
 
-  const randomRoll = () => Math.floor(Math.random() * 6) + 1;
-
   const roll = (isFinal = false) => {
-    const roll1 = randomRoll();
-    const roll2 = randomRoll();
+    const roll1 = rollDie();
+    const roll2 = rollDie();
     setPlayer1Roll(roll1);
     setPlayer2Roll(roll2);
 
     if (isFinal) {
-      setTimeout(() => {
-        if (roll1 > roll2) {
-          setMessage(`${player1Label} Wins!`);
-        } else if (roll1 < roll2) {
-          setMessage(`${player2Label} Wins!`);
-        } else {
-          setMessage("Draw! 🤝");
-        }
+      const messageTimeout = setTimeout(() => {
+        setMessage(outcomeMessage(roll1, roll2, player1Label, player2Label));
         setIsRolling(false);
       }, MESSAGE_DELAY);
+      timeouts.current.push(messageTimeout);
     }
   };
 
@@ -59,24 +53,26 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{message}</h1>
+      <h1 aria-live="polite">{message}</h1>
       <div className="players">
         <input
           type="text"
+          aria-label="Player 1 name"
           value={player1Label}
           onChange={(e) => setPlayer1Label(e.target.value)}
           className="player-label"
         />
         <input
           type="text"
+          aria-label="Player 2 name"
           value={player2Label}
           onChange={(e) => setPlayer2Label(e.target.value)}
           className="player-label"
         />
       </div>
       <div className="dice-container">
-        <Dice number={player1Roll} />
-        <Dice number={player2Roll} />
+        <Dice number={player1Roll} label={`${player1Label} rolled ${player1Roll}`} />
+        <Dice number={player2Roll} label={`${player2Label} rolled ${player2Roll}`} />
       </div>
       <button className={`roll-button ${isRolling ? "disabled" : ""}`} onClick={rollDice} disabled={isRolling}>
         {isRolling ? "Rolling..." : "Roll"}

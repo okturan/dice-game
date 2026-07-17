@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Dice from "./components/Dice";
-import { outcomeMessage, rollDie } from "./game";
+import { outcomeMessage, rollDie, rollTiming } from "./game";
 import "./App.css";
 
 function App() {
@@ -12,11 +12,7 @@ function App() {
   const [player2Label, setPlayer2Label] = useState("Player 2");
   const timeouts = useRef([]);
 
-  const ROLL_ANIMATION_STEPS = 8;
-  const ROLL_INTERVAL = 500;
-  const MESSAGE_DELAY = 500;
-
-  const roll = (isFinal = false) => {
+  const roll = (isFinal = false, messageDelay = 500) => {
     const roll1 = rollDie();
     const roll2 = rollDie();
     setPlayer1Roll(roll1);
@@ -26,7 +22,7 @@ function App() {
       const messageTimeout = setTimeout(() => {
         setMessage(outcomeMessage(roll1, roll2, player1Label, player2Label));
         setIsRolling(false);
-      }, MESSAGE_DELAY);
+      }, messageDelay);
       timeouts.current.push(messageTimeout);
     }
   };
@@ -40,9 +36,12 @@ function App() {
     timeouts.current.forEach(clearTimeout);
     timeouts.current = [];
 
-    for (let i = 0; i <= ROLL_ANIMATION_STEPS; i++) {
-      const isFinal = i === ROLL_ANIMATION_STEPS;
-      const timeout = setTimeout(() => roll(isFinal), ROLL_INTERVAL * i);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const timing = rollTiming(reducedMotion);
+
+    for (let i = 0; i <= timing.steps; i++) {
+      const isFinal = i === timing.steps;
+      const timeout = setTimeout(() => roll(isFinal, timing.messageDelay), timing.interval * i);
       timeouts.current.push(timeout);
     }
   };

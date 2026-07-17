@@ -7,3 +7,11 @@ export function outcomeMessage(player1Roll, player2Roll, player1Label, player2La
   if (player2Roll > player1Roll) return `${player2Label} Wins!`;
   return "Draw! 🤝";
 }
+
+export function rollTiming(reducedMotion) {
+  if (reducedMotion) {
+    return { steps: 0, interval: 0, messageDelay: 0 };
+  }
+
+  return { steps: 8, interval: 500, messageDelay: 500 };
+}

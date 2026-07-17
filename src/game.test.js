@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { outcomeMessage, rollDie } from "./game.js";
+import { outcomeMessage, rollDie, rollTiming } from "./game.js";
 
 test("rollDie maps the random interval to valid inclusive die faces", () => {
   assert.equal(rollDie(() => 0), 1);
@@ -12,4 +12,9 @@ test("outcomeMessage reports either customized winner or a draw", () => {
   assert.equal(outcomeMessage(6, 2, "Ada", "Linus"), "Ada Wins!");
   assert.equal(outcomeMessage(1, 5, "Ada", "Linus"), "Linus Wins!");
   assert.equal(outcomeMessage(3, 3, "Ada", "Linus"), "Draw! 🤝");
+});
+
+test("rollTiming removes repeated motion without changing the final roll", () => {
+  assert.deepEqual(rollTiming(false), { steps: 8, interval: 500, messageDelay: 500 });
+  assert.deepEqual(rollTiming(true), { steps: 0, interval: 0, messageDelay: 0 });
 });

@@ -100,3 +100,9 @@
 .cube.show-bottom {
   transform: translateZ(calc(-1 * var(--cube-translate))) rotateX(90deg);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .cube {
+    transition: none;
+  }
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 import './Dice.css';
 
-function Dice({ number }) {
+function Dice({ number, label }) {
   const faceClass = numberToFaceClass(number);
 
   return (
-    <div className="scene">
+    <div className="scene" role="img" aria-label={label}>
       <div className={`cube ${faceClass}`}>
         <div className="cube__face cube__face--front"></div>
         <div className="cube__face cube__face--back"></div>
